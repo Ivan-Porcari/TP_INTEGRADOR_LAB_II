@@ -11,3 +11,35 @@ body {
   background-color: rgb(240, 240, 240);
 }
 
+
+.button_informes{
+  align-items:flex-end;
+  background-color: grey;
+}
+
+.logo{
+  margin-top: 25px;
+  margin-left: 50px;
+}
+
+.header-page{
+  background-color: #6991DA;
+}
+
+.button-page{
+  border-radius: 20px; 
+  color: white;
+  padding: 8px 18px; /* Espaciado interno para el botón */
+  font-size: 12px;
+  cursor: pointer; /* Cambia el cursor al pasar el ratón sobre el botón */
+  float: right;
+  margin-right: 50px;
+  background-color: transparent;
+  border-color: white;
+}
+
+
+.header-top {
+  background-color: #2B2C30;
+  overflow: hidden;
+}
