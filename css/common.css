@@ -49,6 +49,7 @@ body {
 }
 
 .logo {
+  padding: 0.5em;
   margin-top: 25px;
   margin-left: 50px;
 }
@@ -105,4 +106,41 @@ body {
 
 .grid-text h2 {
   font-size: 60px;
+}
+
+.botones{
+  display: flex;
+  gap: 10px;
+}
+
+.button-paso{
+
+  color: white;
+  background-color: var(--magenta);
+  margin: 25px;
+  height: 100px;
+  width: 50%;
+  padding: 1rem;
+  font: #FFF;
+  font-size: 28px;
+  border-radius: 10px;
+  display: flex; 
+  align-items: center; 
+  border: none;
+}
+
+.button-generales{
+
+  color: white;
+  background-color: var(--celeste);
+  margin: 25px;
+  height: 100px;
+  width: 50%;
+  padding: 1rem;
+  font: #FFF;
+  font-size: 28px;
+  border-radius: 10px;
+  display: flex; 
+  align-items: center; 
+  border: none;
 }
