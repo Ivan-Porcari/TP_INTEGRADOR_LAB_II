@@ -144,3 +144,6 @@ body {
   align-items: center; 
   border: none;
 }
+ footer{
+  background-color: var(--fondo-Footer);
+ }
