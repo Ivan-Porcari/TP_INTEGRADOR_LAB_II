@@ -99,6 +99,36 @@ h3{
   border: 2px solid;
 }
 
+.button-informes{
+
+}
+
+.button-filtrar {
+  background-color: white;
+  border-radius: 15px;
+  padding: 5px 20px;
+  font: #FFF;
+  font-size: 10px;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--textos);
+}
+
+.button-inicio {
+  background-color: var(--gris-claro);
+  border-radius: 5px;
+  padding: 5px 20px;
+  float: right;
+  color: #FFF;
+  font-size: 10px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.button-inicio:hover{
+  color: var(--textos);
+}
+
 
 .header-top {
   background-color: var(--fondo-Menu);
