@@ -2,6 +2,7 @@
 
 * {
   font-family: 'Roboto', sans-serif;
+  padding: 0;
   --magenta: #ee3d8f;
   --celeste: #37bbed;
   --morado: #9283be;
@@ -35,11 +36,10 @@
   --mensaje-usuario-rojo: #dc3545;
 }
 
-html,
-body {
-  margin: 0;
+html, body {
+  margin: 0 auto;
   padding: 0;
-  background-color: white;
+  background-color: var(--fondo-pantalla);
 }
 
 
@@ -145,5 +145,24 @@ body {
   border: none;
 }
  footer{
+  margin-top: 10em;
+  height: 25vh;
   background-color: var(--fondo-Footer);
+  color: var(--texto-footer);
  }
+ 
+ .imagenes_footer{
+  display: flex;
+  justify-content: space-around;
+ }
+
+ .imagenes_footer > img{
+  padding: 0.5em;
+  margin-left: 0;
+ }
+
+ .footer_texto{
+  padding: 1em;
+  margin-top: 10px;
+ }
+
