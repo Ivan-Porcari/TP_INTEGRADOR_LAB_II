@@ -226,3 +226,13 @@ h3{
   color: var(--texto-footer);
  }
 
+ .background-contenido{
+  background-color: #E3F2F3;
+  margin-left: 20px;
+ }
+
+ .background-contenido h3{
+  margin-top: 20px;
+  font-size: 40px;
+
+ }

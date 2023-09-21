@@ -1,0 +1,48 @@
+.button-classic{
+    background-color: transparent;
+    color: white;
+    border: 0cap;
+    margin-left: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.button-informes{
+    border-radius: 20px;
+    color: white;
+    padding: 8px 18px;
+    /* Espaciado interno para el botón */
+    font-size: 12px;
+    cursor: pointer;
+    /* Cambia el cursor al pasar el ratón sobre el botón */
+    margin-right: 50px;
+    background-color: transparent;
+    border-color: white;
+    margin-left: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 2px solid;
+}
+
+.button-filtrar{
+    margin-left: 30px;
+    font-size: 12px;
+}
+
+.button-inicio{
+  float: right;
+  margin-right: 50px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+#sec-titulo {
+    margin-left: 20px;
+}
+
+#sec-titulo h2 {
+    font-size: 30px;
+    
+}
