@@ -226,6 +226,10 @@ header{
   line-height: 40px;
  }
 
+ .footer_texto > a{
+  color: inherit;
+  text-decoration: none;
+ }
  .background-contenido{
   margin-left: 20px;
  }
@@ -233,5 +237,6 @@ header{
  .background-contenido > h3{
   margin-top: 20px;
   font-size: 40px;
-
  }
+
+ 

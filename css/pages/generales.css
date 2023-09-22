@@ -1,13 +1,6 @@
-.button-classic {
-    background-color: transparent;
-    color: white;
-    border: 0cap;
-    margin-left: 50px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 18px;
+body{
+    background-color: white;
 }
-
 .button-informes {
     border-radius: 20px;
     color: white;
@@ -19,15 +12,27 @@
     margin-right: 50px;
     background-color: transparent;
     border-color: white;
-    margin-left: 30px;
     margin-top: 10px;
     margin-bottom: 10px;
     border: 2px solid;
 }
-
 .button-filtrar {
     margin-left: 30px;
     font-size: 12px;
+    border: none;
+}
+
+.button-paso-mini{
+    border: none;
+    height: 35px;
+    margin: 5px;
+    width: 120px;
+    font-size: 13px;
+}
+
+.button-paso-mini:hover{
+    background-color: var(--gris-claro) ;
+    cursor: pointer;
 }
 
 .button-inicio {
@@ -52,6 +57,20 @@
     color: lightblue;
 }
 
+.botones_superior{
+    display: flex;
+    align-items: center;
+}
+
+.cantidades{
+    width: 180px;
+    float: right;
+    display: flex;
+    margin-left: 200px;
+}
+
+
+
 .button-sumarInforme {
     background-color: lightgray;
     color: white;
@@ -59,10 +78,8 @@
     margin-left: 20px;
     border-radius: 10px;
     border-color: transparent;
-    padding-left: 10px;
-    padding-top: 5px;
-    padding-right: 10px;
-    padding-bottom: 5px;
+    height: 40px;
+    width: 300px;
     
 }
 
@@ -71,7 +88,8 @@
 
     background-color: var(--magenta);
     border-radius: 10px;
-    margin: 15px;
+    margin-left: 15px;
+    margin-right: 15px;
     padding: 0.5rem 1rem;
     font-family: Arial, sans-serif;
     font-size: 12px;
@@ -85,7 +103,8 @@
 
     background-color: var(--celeste);
     border-radius: 10px;
-    margin: 15px;
+    margin-left: 180px;
+    margin-right: 15px;
     padding: 0.5rem 1rem;
     font-family: Arial, sans-serif;
     font-size: 12px;
@@ -98,7 +117,6 @@
 .button-escrutado {
     background-color: var(--morado);
     border-radius: 10px;
-    margin: 15px;
     padding: 0.5rem 1rem;
     font-family: Arial, sans-serif;
     font-size: 12px;
@@ -113,14 +131,44 @@
     float: left;
 }
 
-.cantidades{
-    display: flex;
-    float: right;
-}
 
 .cantidades h3 {
     color: white;    
 }
+
+.cuadros{
+    margin: 35px;
+    display: flex;
+    justify-content: space-around;
+    height: 600px;
+}
+
+.cuadros > *{
+    display: block;
+    border: 1px var(--borde-Grilla) solid;
+    border-radius: 25px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 33vw;
+    margin: 10px;
+}
+
+.cuadros > h3{
+    margin: auto;
+}
+.cuadros-texto{
+    font-weight: bold;
+    padding: 1.8em 0 0 0;
+    white-space: nowrap;
+    justify-self: center;
+}
+#cuadros_mapas > svg{
+    padding-top: 100px;
+}
+.placeholder_estadisticaHor{
+    overflow: hidden scroll;
+}
+
 
 .select-general {
     color: var(--celeste);
