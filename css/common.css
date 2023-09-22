@@ -2,7 +2,6 @@
 
 * {
   font-family: 'Roboto', sans-serif;
-  padding: 0;
   --magenta: #ee3d8f;
   --celeste: #37bbed;
   --morado: #9283be;
@@ -80,7 +79,7 @@ header{
 }
 
 .header-page {
-  padding: 0.5em;
+  /*removimos el padding porque sentimos que lo ensanchaba demasiado a comparación de las fotos de referencia*/
   background-color: var(--fondo-Cabecera);
   color: white;
   margin: 0 auto auto auto;
@@ -158,30 +157,10 @@ header{
 }
 
 
-.grid-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
-  align-items: center;
-}
 
-.grid-text {
-  grid-column: 1 / 2;
-  margin-left: 50px;
-  max-width: 700px;
-}
-
-.grid-img img {
-  max-width: 50%;
-  width: 50%;
-  height: auto;
-  border-radius: 50px;
-  margin-top: 30px;
-  margin-left: 200px;
-}
 
 .grid-text h2 {
-  font-size: 60px;
+  font-size: 30px;
 }
 
 .botones{
@@ -221,7 +200,7 @@ header{
   border: none;
 }
  footer{
-  height: 120px;
+  height: 200px;
   padding-left: 40px;
   display: flex;
   background-color: var(--fondo-Footer);
@@ -244,14 +223,14 @@ header{
   padding: 1em;
   margin-top: 10px;
   color: var(--texto-footer);
+  line-height: 40px;
  }
 
  .background-contenido{
-  background-color: #E3F2F3;
   margin-left: 20px;
  }
 
- .background-contenido h3{
+ .background-contenido > h3{
   margin-top: 20px;
   font-size: 40px;
 

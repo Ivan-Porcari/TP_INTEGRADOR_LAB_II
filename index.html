@@ -8,6 +8,7 @@
     <link rel="shortcut icon" type="image/png" href="img/icons/favicon-16x16.png">
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/pages/index.css"/>
 </head>
 
 <body>
@@ -20,6 +21,11 @@
         </div>
         <!--Barra de menú principal-->
         <div class="header-top">
+            <h3>CONSULTAR:</h3>
+            <button class="button-paso-mini" onclick="window.location.href='paso.html'">Paso</button>
+            <a href="generales.html">
+                <button class="button-generales-mini">Generales</button>
+            </a>
             <a href="informes.html">
                 <button class="button-page">INFORMES</button>
             </a>
@@ -32,11 +38,11 @@
         <section id="sec-titulo" class="grid-container">
             <!--Seccion para agregar una palicula favorita por codigo-->
             <div class="grid-text">
-                <h2>Resultados Electorales </h2>
+                <h2 id="Resultados_titulo">Resultados Electorales</h2>
                 <p>La Dirección Nacional Electoral y el Observatorio Político Electoral del Ministerio
                     del Interior ponen a disposición una herramienta de búsqueda avanzada y generación
                     de informes personalizados con los resultados provisionales de las elecciones
-                    desarrolladas en los últimos años. Los resultados que se presentan son los correspondientes a
+                    desarrolladas en los últimos años.<br> Los resultados que se presentan son los correspondientes a
                     escrutinios provisorios de
                     elecciones nacionales. Dicho recuento es responsabilidad de la DINE. También se
                     presentan los resultados provisionales de las elecciones provinciales y/o locales
@@ -51,7 +57,7 @@
            
             <div class="background-contenido">
                 <h3>Elecciones 2021</h3>
-                <h5>Resultados Provisorios</h5>
+                <h5>Seleccione el tipo de elección que quiere consultar</h5>
                 <div class="botones">
                     <button class="button-paso" onclick="window.location.href='paso.html'"><svg version="1.1" id="Capa_1"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
