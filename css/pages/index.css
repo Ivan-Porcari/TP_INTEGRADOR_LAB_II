@@ -21,6 +21,11 @@ body{
     width: 120px;
     font-size: 13px;
 }
+
+.button-paso-mini:hover{
+    background-color: var(--gris-claro) ;
+    cursor: pointer;
+}
 .button-generales-mini{
     border: none;
     height: 35px;
@@ -28,6 +33,12 @@ body{
     width: 120px;
     font-size: 13px;
 }
+
+.button-generales-mini:hover{
+    background-color: var(--gris-claro) ;
+    cursor: pointer;
+}
+
 #Resultados_titulo{
     margin-top: 0px;
 }
