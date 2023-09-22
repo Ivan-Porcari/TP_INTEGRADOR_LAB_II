@@ -239,4 +239,47 @@ header{
   font-size: 40px;
  }
 
+ .cuadros-mensaje {
+  width: 400px;
+  height: 150px;
+  border-radius: 10px;
+  background: transparent;
+  text-align: center;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto;
+  padding: 15px;
+  list-style-type: none;
+}
+
+.correcto {
+  background-color: var(--mensaje-usuario-verde);
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.error {
+  background-color: var(--mensaje-usuario-rojo);
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.cuidado {
+  background-color: var(--mensaje-usuario-amarillo);
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.texto-mensaje{
+  font-weight: 200px;
+  color: #FFffFF;
+  padding: 10px;
+}
+
+.iconos_mensaje{
+  font-size: 20px;
+  margin-right: 8px;
+}
+
  

@@ -1,3 +1,42 @@
+
+
+.button-paso-mini{
+    border: none;
+    height: 35px;
+    margin: 5px;
+    width: 120px;
+    font-size: 13px;
+}
+
+.button-paso-mini:hover{
+    background-color: var(--gris-claro) ;
+    cursor: pointer;
+}
+.button-generales-mini{
+    border: none;
+    height: 35px;
+    margin: 5px;
+    width: 120px;
+    font-size: 13px;
+}
+
+.button-generales-mini:hover{
+    background-color: var(--gris-claro) ;
+    cursor: pointer;
+}
+
+.header-top{
+    justify-items: center;
+}
+
+.header-top > h3{
+    display: inline;
+    font-size: 12px;
+    color: white;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
 #sec-titulo {
     margin-left: 20px;
 }
@@ -15,74 +54,12 @@
     justify-content: center;
 }
 
+
 .button-inicio {
+    border: none;
+    margin: 10px;
     float: right;
-    margin-right: 50px;
-    margin-top: 10px;
-    margin-bottom: 10px;
     font-size: 15px;
-}
-
-.button-generales-mini{
-    background-color: var(--celeste);
-    margin-top: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 15px;
-    color: #FFF;
-    text-transform: uppercase;
-    text-align: center;
-  }
-  
-  .button-paso-mini{
-    background-color: var(--magenta);
-    margin-top: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    font-size: 15px;
-    color: #FFF;
-    text-transform: uppercase;
-    text-align: center;
-  }
-
-.cuadros-mensaje {
-    width: 400px;
-    height: 150px;
-    border-radius: 10px;
-    background: transparent;
-    text-align: center;
-    font-size: 12px;
-    display: flex;
-    flex-direction: column;
-    margin: 20px auto;
-    padding: 15px;
-    list-style-type: none;
-}
-
-.correcto {
-    background-color: var(--mensaje-usuario-verde);
-    margin-bottom: 10px;
-    border-radius: 10px;
-}
-
-.error {
-    background-color: var(--mensaje-usuario-rojo);
-    margin-bottom: 10px;
-    border-radius: 10px;
-}
-
-.cuidado {
-    background-color: var(--mensaje-usuario-amarillo);
-    margin-bottom: 10px;
-    border-radius: 10px;
-}
-
-.error p,
-.correcto p,
-.cuidado p {
-    font-weight: 200;
-    color: #FFffFF;
-    padding: 15px;
 }
 
 .grid{
