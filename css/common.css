@@ -144,6 +144,11 @@ header{
   font-size: 10px;
   text-transform: uppercase;
   text-align: center;
+  border: none;
+  margin: 10px;
+  float: right;
+  font-size: 15px;
+
 }
 
 .button-inicio:hover{
@@ -282,4 +287,3 @@ header{
   margin-right: 8px;
 }
 
- 
