@@ -1,4 +1,4 @@
-.button-classic{
+.button-classic {
     background-color: transparent;
     color: white;
     border: 0cap;
@@ -8,7 +8,7 @@
     font-size: 18px;
 }
 
-.button-informes{
+.button-informes {
     border-radius: 20px;
     color: white;
     padding: 8px 18px;
@@ -25,17 +25,17 @@
     border: 2px solid;
 }
 
-.button-filtrar{
+.button-filtrar {
     margin-left: 30px;
     font-size: 12px;
 }
 
-.button-inicio{
-  float: right;
-  margin-right: 50px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 15px;
+.button-inicio {
+    float: right;
+    margin-right: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 15px;
 }
 
 #sec-titulo {
@@ -44,15 +44,15 @@
 
 #sec-titulo h2 {
     font-size: 30px;
-    
+
 }
 
-#sec-titulo p{
+#sec-titulo p {
     font-size: 20px;
     color: lightblue;
 }
 
-.button-sumarInforme{
+.button-sumarInforme {
     background-color: lightgray;
     color: white;
     font-size: 15px;
@@ -63,56 +63,82 @@
     padding-top: 5px;
     padding-right: 10px;
     padding-bottom: 5px;
+    
 }
 
 
-.button-electores{
+.button-electores {
 
-    color: white;
     background-color: var(--magenta);
-    margin: 25px;
-    height: 100px;
-    width: 50%;
-    padding: 1rem;
-    font: #FFF;
-    font-size: 28px;
     border-radius: 10px;
-    display: flex; 
-    align-items: center; 
-    border: none;
+    margin: 15px;
+    padding: 0.5rem 1rem;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: #FFF;
+    display: flex;
+    height: 100px;
+    width: 280px;
 }
 
-.button-mesas{
+.button-mesas {
 
-    color: white;
     background-color: var(--celeste);
-    margin: 25px;
-    height: 100px;
-    width: 50%;
-    padding: 1rem;
-    font: #FFF;
-    font-size: 28px;
     border-radius: 10px;
-    display: flex; 
-    align-items: center; 
-    border: none;
+    margin: 15px;
+    padding: 0.5rem 1rem;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: #FFF;
+    display: flex;
+    height: 100px;
+    width: 280px;
 }
 
-.button-escrutado{
-    color: white;
-    background-color: #7A8CE1;
-    margin: 25px;
-    height: 100px;
-    width: 50%;
-    padding: 1rem;
-    font: #FFF;
-    font-size: 28px;
+.button-escrutado {
+    background-color: var(--morado);
     border-radius: 10px;
-    display: flex; 
-    align-items: center; 
-    border: none;
+    margin: 15px;
+    padding: 0.5rem 1rem;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    color: #FFF;
+    display: flex;
+    height: 100px;
+    width: 280px;
+    
 }
 
-.cantidades h3{
-    color: white;
+.individual{
+    float: left;
+}
+
+.cantidades{
+    display: flex;
+    float: right;
+}
+
+.cantidades h3 {
+    color: white;    
+}
+
+.select-general {
+    color: var(--celeste);
+    font-weight: bold;
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    height: 30px;
+    padding: 5px;
+}
+
+.label-general {
+    color: var(--celeste);
+    font-weight: bold;
+    background: transparent;
+    border: none;
+    /* Sin borde */
+    font-size: 14px;
+    height: 30px;
+    padding: 5px;
 }
