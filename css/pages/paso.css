@@ -59,11 +59,11 @@ body{
 
 .botones_superior{
     display: flex;
-    align-items: center;
+    align-items: end;
 }
 
 .cantidades{
-    width: 180px;
+    width: 2000px;
     float: right;
     display: flex;
     margin-left: 200px;
@@ -83,7 +83,7 @@ body{
     
 }
 
-
+/* ARREGLAR CON FLEX EL CENTRADO A LA DERECHA*/
 .button-electores {
 
     background-color: var(--magenta);
@@ -133,7 +133,9 @@ body{
 
 
 .cantidades h3 {
-    color: white;    
+    display: flex;
+    color: white;
+    align-content: end; 
 }
 
 .cuadros{
@@ -157,7 +159,6 @@ body{
     margin: auto;
 }
 .cuadros-texto{
-    font-weight: bold;
     padding: 1.8em 0 0 0;
     white-space: nowrap;
     justify-self: center;
