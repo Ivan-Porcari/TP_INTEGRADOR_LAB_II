@@ -62,6 +62,10 @@ body{
     align-items: center;
 }
 
+.clearfix {
+    clear: both;
+}
+
 .cantidades{
     width: 180px;
     float: right;
