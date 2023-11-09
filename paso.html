@@ -10,6 +10,8 @@
     <!-- Estilos CSS -->
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/pages/paso.css" />
+    <script src="js/common.js" defer></script>
+    <script src="js/pages/generales.js" defer></script>
 
 </head>
 
@@ -24,7 +26,7 @@
         <!--Barra de menú principal-->
         <div class="header-top">
             <label for="select-aa" class="label-general">Año</label>
-            <select name="select-aa" id="select-aa" class="select-general"></select>
+            <select name="select-aa" onchange="seleccionarAnio();" id="select-aa" class="select-general"></select>
             <label for="select-cargo" class="label-general">Cargo</label>
             <select name="select-cargo" id="select-cargo" class="select-general"></select>
             <label for="select-distrito" class="label-general">Distrito</label>
