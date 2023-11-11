@@ -3,9 +3,9 @@ const tipoEleccion = 2;
 const anioEleccion = 0;
 const tipoRecuento = 1;
 const categoriaId = 2;
-const idDistrito = 0;
-const circuitoId = '';
-const mesaId = '';
+let idDistrito = 0;
+let circuitoId = '';
+let mesaId = '';
 var periodosSelect = document.getElementById('select-aa');
 var idCargo = document.getElementById('select-cargo');
 var idDistritoOption = document.getElementById('select-distrito');
@@ -27,7 +27,7 @@ fetch(urlPeriodos)
     .then(response => response.json())
     .then(data => {
         data.forEach(periodo => {
-            const option = document.createElement('option');
+            let option = document.createElement('option');
             option.text = periodo;
             option.value = periodo;
             periodosSelect.add(option);
@@ -50,7 +50,7 @@ function seleccionarAnio() {
                 datosJSON.forEach((eleccion) => {
                     if (eleccion.IdEleccion == tipoEleccion) {
                         eleccion.Cargos.forEach(cargo => {
-                            const option = document.createElement('option');
+                            let option = document.createElement('option');
                             option.text = cargo.Cargo;
                             option.value = cargo.IdCargo;
                             idCargo.appendChild(option);
@@ -76,7 +76,7 @@ function seleccionarDistrito() {
             eleccion.Cargos.forEach(cargo => {
                 if (cargo.IdCargo == idCargos) {
                     cargo.Distritos.forEach(distrito => {
-                        const option = document.createElement('option');
+                        let option = document.createElement('option');
                         option.text = distrito.Distrito;
                         option.value = distrito.IdDistrito;
                         idDistritoOption.add(option);
@@ -89,32 +89,41 @@ function seleccionarDistrito() {
 }
 
 function seleccionarSeccion() {
+    let selectedDistrito = document.getElementById("select-distrito")
     selectSeccion.innerHTML = '';
-    selectSeccion.appendChild(new Option("Seleccione una Sección", ""));
-    idDistrito = idDistritoOption.value;
-    let selectDistrito = idDistritoOption.options[idDistritoOption.selectedIndex];
-    distritoTexto = selectDistrito.textContent;
+    if (selectedDistrito.options[selectedDistrito.selectedIndex].text != "ARGENTINA"){
+        document.getElementById("select-seccion").style.display = "Inline"; //si el valor no es "ARGENTINA", hace que vuelva a ser visible si ya se había seleccionado esa opción antes
+        selectSeccion.appendChild(new Option("Seleccione una Sección", ""));
+        idDistrito = idDistritoOption.value;
+        let selectDistrito = idDistritoOption.options[idDistritoOption.selectedIndex];
+        distritoTexto = selectDistrito.textContent;
 
-    datosJSON.forEach((eleccion) => {
-        if (eleccion.IdEleccion == tipoEleccion) {
-            eleccion.Cargos.forEach(cargo => {
-                if (cargo.IdCargo == idCargos) {
-                    cargo.Distritos.forEach(distrito => {
-                        if (distrito.IdDistrito == idDistrito) {
-                            distrito.SeccionesProvinciales.forEach(seccionesProvinciales => {
-                                seccionesProvinciales.Secciones.forEach(distrito => {
-                                    const option = document.createElement("option");
-                                    option.value = distrito.IdSeccion;
-                                    option.text = distrito.Seccion;
-                                    selectSeccion.appendChild(option);
-                                });
-                            })
-                        }
-                    });
-                }
-            });
-        }
-    })
+        datosJSON.forEach((eleccion) => {
+            if (eleccion.IdEleccion == tipoEleccion) {
+                eleccion.Cargos.forEach(cargo => {
+                    if (cargo.IdCargo == idCargos) {
+                        cargo.Distritos.forEach(distrito => {
+                            if (distrito.IdDistrito == idDistrito) {
+                                distrito.SeccionesProvinciales.forEach(seccionesProvinciales => {
+                                    seccionesProvinciales.Secciones.forEach(distrito => {
+                                        let option = document.createElement("option");
+                                        option.value = distrito.IdSeccion;
+                                        option.text = distrito.Seccion;
+                                        selectSeccion.appendChild(option);
+                                    });
+                                })
+                            }
+                        });
+                    }
+                });
+            }
+        })
+    }
+    else{
+        document.getElementById("select-seccion").style.display = "none"; // si se quieren buscar los resultados presidenciales a nivel nacional, esconde el selector de sección ya que es innecesario y su unica opción es "null"
+
+        console.log(selectedDistrito.options[selectedDistrito.selectedIndex].text) // debería solo logear "ARGENTINA" por razones de debugeo, borrar más adelante
+    }
 }
 
 

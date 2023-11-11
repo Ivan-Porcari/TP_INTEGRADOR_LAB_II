@@ -73,6 +73,12 @@ header{
   background-color: var(--fondo-Cabecera);
 }
 
+select{
+  text-align: center;
+  width: 150px;
+  text-overflow: ellipsis;
+}
+
 .logo {
   margin-left: 5px;
   margin-top: 5px;
