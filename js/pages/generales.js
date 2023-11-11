@@ -1,23 +1,26 @@
-// Para las paso
-// const tipoEleccion = 1;
-
-// Para las generales
+// Para las paso const tipoEleccion = 1;
 const tipoEleccion = 2;
+const anioEleccion = 0;
+const tipoRecuento = 1;
+const categoriaId = 2;
+const idDistrito = 0;
+const circuitoId = '';
+const mesaId = '';
 var periodosSelect = document.getElementById('select-aa');
 var idCargo = document.getElementById('select-cargo');
 var idDistritoOption = document.getElementById('select-distrito');
 var selectSeccion = document.getElementById('select-seccion');
-
 let idCargos = '';
-let idDistrito = '';
-// Se utilizarán solo recuentos definitivos
-// const tipoRecuento = 1;
+let datosJSON = '';
+let datosJSON2 = '';
+let seccionProvincialId = '';
 
-// API MINISTERIO DEL INTERIOR
-// falta sumar boton de generales/paso para filtrar
-const url = "https://resultados.mininterior.gob.ar/api/menu"
-const urlPeriodos = "https://resultados.mininterior.gob.ar/api/menu/periodos"
-const urlCargos = "https://resultados.mininterior.gob.ar/api/menu?año="
+
+const url = "https://resultados.mininterior.gob.ar/api/menu";
+const urlPeriodos = "https://resultados.mininterior.gob.ar/api/menu/periodos";
+const urlCargos = "https://resultados.mininterior.gob.ar/api/menu?año=";
+
+
 
 //Combo periodo, devuelve el dato del periodo
 fetch(urlPeriodos)
@@ -37,16 +40,12 @@ fetch(urlPeriodos)
 //llamar a una función para toma rel valor del select-aa
 function seleccionarAnio() {
     if (periodosSelect.value) {
+        idCargo.innerHTML = '';
+        idCargo.appendChild(new Option("Seleccione un Cargo", ""));
         fetch(urlCargos + periodosSelect.value) //periodosSelect = eleccion del año por el usuario
             .then(response => response.json())
             .then(data => {
                 datosJSON = data;
-                console.log(datosJSON)
-                // const cargosSelect = document.getElementById('select-cargo'); // ID del botón de HTML
-
-                while (idCargo.firstChild) {
-                    idCargo.removeChild(idCargo.firstChild);
-                }
 
                 datosJSON.forEach((eleccion) => {
                     if (eleccion.IdEleccion == tipoEleccion) {
@@ -66,7 +65,8 @@ function seleccionarAnio() {
 }
 
 function seleccionarDistrito() {
-
+    idDistritoOption.innerHTML = '';
+    idDistritoOption.appendChild(new Option("Seleccione un Distrito", ""));
     idCargos = idCargo.value;
     let selectCargo = idCargo.options[idCargo.selectedIndex];
     cargoTexto = selectCargo.textContent;
@@ -74,8 +74,8 @@ function seleccionarDistrito() {
     datosJSON.forEach((eleccion) => {
         if (eleccion.IdEleccion == tipoEleccion) {
             eleccion.Cargos.forEach(cargo => {
-                if(cargo.IdCargo == idCargos){
-                    cargo.Distritos.forEach(distrito =>{
+                if (cargo.IdCargo == idCargos) {
+                    cargo.Distritos.forEach(distrito => {
                         const option = document.createElement('option');
                         option.text = distrito.Distrito;
                         option.value = distrito.IdDistrito;
@@ -88,7 +88,9 @@ function seleccionarDistrito() {
     })
 }
 
-function seleccionarSeccion(){
+function seleccionarSeccion() {
+    selectSeccion.innerHTML = '';
+    selectSeccion.appendChild(new Option("Seleccione una Sección", ""));
     idDistrito = idDistritoOption.value;
     let selectDistrito = idDistritoOption.options[idDistritoOption.selectedIndex];
     distritoTexto = selectDistrito.textContent;
@@ -96,9 +98,9 @@ function seleccionarSeccion(){
     datosJSON.forEach((eleccion) => {
         if (eleccion.IdEleccion == tipoEleccion) {
             eleccion.Cargos.forEach(cargo => {
-                if(cargo.IdCargo == idCargos){
-                    cargo.Distritos.forEach(distrito =>{
-                        if(distrito.IdDistrito == idDistrito){
+                if (cargo.IdCargo == idCargos) {
+                    cargo.Distritos.forEach(distrito => {
+                        if (distrito.IdDistrito == idDistrito) {
                             distrito.SeccionesProvinciales.forEach(seccionesProvinciales => {
                                 seccionesProvinciales.Secciones.forEach(distrito => {
                                     const option = document.createElement("option");
@@ -114,4 +116,6 @@ function seleccionarSeccion(){
         }
     })
 }
+
+
 
