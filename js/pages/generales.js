@@ -126,5 +126,50 @@ function seleccionarSeccion() {
     }
 }
 
+function filtrarInformacion() {
+    // Validar que los campos no estén vacíos
+    if (periodosSelect.value === "" || idCargo.value === "" || idDistritoOption.value === "" || (selectSeccion.style.display !== "none" && selectSeccion.value === "")) {
+        mostrarMensaje("Por favor, asegúrese de que todos los campos estén seleccionados y no vacíos", "amarillo");
+        return;
+    }
 
+    // Recuperar valores de los filtros
+    let anioEleccion = periodosSelect.value;
+    let categoriaId = idCargo.value;
+    let idDistrito = idDistritoOption.value;
+    let seccionProvincialId = selectSeccion.value;
+    let seccionId = selectSeccion.value;
+    let tipoEleccionGlobal = tipoEleccion; // Asegúrate de que esta variable está definida correctamente en tu script
+    let circuitoIdGlobal = circuitoId; // Asegúrate de que esta variable está definida correctamente en tu script
+    let mesaIdGlobal = mesaId;
+
+    // Construir la URL con los parámetros
+    let url = `https://resultados.mininterior.gob.ar/api/resultados/getResultados?anioEleccion=${anioEleccion}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccionGlobal}&categoriaId=${categoriaId}&distritoId=${idDistrito}&seccionId=${seccionId}&circuitoId=${circuitoIdGlobal}&mesaId=${mesaIdGlobal}`;
+    console.log(url);
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            mostrarMensaje(`Error: ${error.message}`, "rojo");
+        });
+}
+
+function mostrarMensaje(mensaje, color) {
+    let mensajeDiv = document.getElementById('mensajeFiltro');
+    if (!mensajeDiv) {
+        mensajeDiv = document.createElement("div");
+        mensajeDiv.id = 'mensajeFiltro';
+        document.body.appendChild(mensajeDiv);
+    }
+    mensajeDiv.textContent = mensaje;
+    mensajeDiv.style.color = color === "amarillo" ? "yellow" : "red";
+    mensajeDiv.style.display = "block";
+}
 
