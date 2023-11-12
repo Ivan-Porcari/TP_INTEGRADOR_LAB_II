@@ -128,9 +128,9 @@ function seleccionarSeccion() {
 
 function filtrarInformacion() {
     // Validar que los campos no estén vacíos
-    if (periodosSelect.value === "" || idCargo.value === "" || idDistritoOption.value === "" || (selectSeccion.style.display !== "none" && selectSeccion.value === "")) {
-        mostrarMensaje("Por favor, asegúrese de que todos los campos estén seleccionados y no vacíos", "amarillo");
-        return;
+    let selectedDistrito = document.getElementById("select-distrito")
+    if (periodosSelect.value === "" || idCargo.value === "" || idDistritoOption.value === "" || selectSeccion.value === "" && selectedDistrito.options[selectedDistrito.selectedIndex].text != "ARGENTINA") {
+        mostrarMensaje("amarillo");
     }
 
     // Recuperar valores de los filtros
@@ -155,21 +155,37 @@ function filtrarInformacion() {
         })
         .then(data => {
             console.log(data);
+            const divAgrupaciones = document.createElement("div")
+            document.getElementById("estadisticas_partidos").appendChild(divAgrupaciones)
+            data.valoresTotalizadosPositivos.forEach(partido => {
+                console.log(partido.nombreAgrupacion)
+                let divPartido = document.createElement("div")
+                divPartido.classList.add("partido")
+                divPartido.innerHTML = `<h3>${partido.nombreAgrupacion}</h3>`
+                divAgrupaciones.appendChild(divPartido)
+            })
         })
         .catch(error => {
-            mostrarMensaje(`Error: ${error.message}`, "rojo");
+            mostrarMensaje("rojo");
         });
 }
 
-function mostrarMensaje(mensaje, color) {
-    let mensajeDiv = document.getElementById('mensajeFiltro');
-    if (!mensajeDiv) {
-        mensajeDiv = document.createElement("div");
-        mensajeDiv.id = 'mensajeFiltro';
-        document.body.appendChild(mensajeDiv);
+async function mostrarMensaje(color) {
+    let mensajeClass
+    switch(color){
+        case "rojo":
+            mensajeClass = "error";
+        case "verde":
+            mensajeClass = "correcto";
+
+        default:
+            mensajeClass = "cuidado";
+
     }
-    mensajeDiv.textContent = mensaje;
-    mensajeDiv.style.color = color === "amarillo" ? "yellow" : "red";
-    mensajeDiv.style.display = "block";
+    document.getElementById(mensajeClass).style.display = "block";
+    //setTimeout(document.getElementById(mensajeClass).style.display = "none", 5000);
+    setTimeout(() => {
+        document.getElementById(mensajeClass).style.display = "none"}, "3000");
 }
+
 

@@ -255,19 +255,19 @@ select{
   list-style-type: none;
 }
 
-.correcto {
+#correcto {
   background-color: var(--mensaje-usuario-verde);
   margin-bottom: 10px;
   border-radius: 10px;
 }
 
-.error {
+#error {
   background-color: var(--mensaje-usuario-rojo);
   margin-bottom: 10px;
   border-radius: 10px;
 }
 
-.cuidado {
+#cuidado {
   background-color: var(--mensaje-usuario-amarillo);
   margin-bottom: 10px;
   border-radius: 10px;
@@ -284,3 +284,16 @@ select{
   margin-right: 8px;
 }
 
+#correcto, #cuidado, #error {
+  display: none;
+}
+
+.partido {
+  text-align: left;
+  font-weight: 100;
+  font-size: 1px;
+}
+
+#cuadros_estadisticas{
+  overflow-x: scroll;
+}
