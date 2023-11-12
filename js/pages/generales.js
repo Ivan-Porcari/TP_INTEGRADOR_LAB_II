@@ -145,7 +145,7 @@ function filtrarInformacion() {
     let circuitoIdGlobal = circuitoId; // Asegúrate de que esta variable está definida correctamente en tu script
     let mesaIdGlobal = mesaId;
 
-    crearTitulo();
+    crearTitulo(seccionTexto);
 
     // Construir la URL con los parámetros
     let url = `https://resultados.mininterior.gob.ar/api/resultados/getResultados?anioEleccion=${anioEleccion}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccionGlobal}&categoriaId=${categoriaId}&distritoId=${idDistrito}&seccionId=${seccionId}&circuitoId=${circuitoIdGlobal}&mesaId=${mesaIdGlobal}`;
@@ -211,14 +211,14 @@ async function mostrarMensaje(color) {
     }, "3000");
 }
 
-function crearTitulo() {
+function crearTitulo(seccionTexto) {
 
     const titulo = document.getElementById('sec-titulo');
 
     titulo.innerHTML = `
     <div class="" id="sec-titulo">
-        <h2>Elecciones ${datos.anioEleccion} | Generales</h2>
-        <p class="texto-path">${datos.anioEleccion} > Generales > Provisorio > ${datos.cargoTexto} > ${datos.distritoTexto} > ${datos.seccionTexto}</p>
+        <h2>Elecciones ${anioEleccion} | Generales</h2>
+        <p class="texto-path">${anioEleccion} > Generales > Provisorio > ${cargoTexto} > ${distritoTexto} > ${seccionTexto}</p>
     </div>`
 
 }
