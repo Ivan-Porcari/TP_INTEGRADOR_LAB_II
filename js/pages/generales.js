@@ -91,7 +91,7 @@ function seleccionarDistrito() {
 function seleccionarSeccion() {
     let selectedDistrito = document.getElementById("select-distrito")
     selectSeccion.innerHTML = '';
-    if (selectedDistrito.options[selectedDistrito.selectedIndex].text != "ARGENTINA"){
+    if (selectedDistrito.options[selectedDistrito.selectedIndex].text != "ARGENTINA") {
         document.getElementById("select-seccion").style.display = "Inline"; //si el valor no es "ARGENTINA", hace que vuelva a ser visible si ya se había seleccionado esa opción antes
         selectSeccion.appendChild(new Option("Seleccione una Sección", ""));
         idDistrito = idDistritoOption.value;
@@ -119,7 +119,7 @@ function seleccionarSeccion() {
             }
         })
     }
-    else{
+    else {
         document.getElementById("select-seccion").style.display = "none"; // si se quieren buscar los resultados presidenciales a nivel nacional, esconde el selector de sección ya que es innecesario y su unica opción es "null"
 
         console.log(selectedDistrito.options[selectedDistrito.selectedIndex].text) // debería solo logear "ARGENTINA" por razones de debugeo, borrar más adelante
@@ -130,7 +130,7 @@ function filtrarInformacion() {
     // Validar que los campos no estén vacíos
     let selectedDistrito = document.getElementById("select-distrito")
     if (periodosSelect.value === "" || idCargo.value === "" || idDistritoOption.value === "" || selectSeccion.value === "" && selectedDistrito.options[selectedDistrito.selectedIndex].text != "ARGENTINA") {
-        mostrarMensaje("amarillo");
+        mostrarMensaje("amarillo-filtrar");
     }
 
     // Recuperar valores de los filtros
@@ -139,9 +139,13 @@ function filtrarInformacion() {
     let idDistrito = idDistritoOption.value;
     let seccionProvincialId = selectSeccion.value;
     let seccionId = selectSeccion.value;
+    let selectedSeccion = selectSeccion.options[selectSeccion.selectedIndex];
+    let seccionTexto = selectedSeccion.textContent;
     let tipoEleccionGlobal = tipoEleccion; // Asegúrate de que esta variable está definida correctamente en tu script
     let circuitoIdGlobal = circuitoId; // Asegúrate de que esta variable está definida correctamente en tu script
     let mesaIdGlobal = mesaId;
+
+    crearTitulo();
 
     // Construir la URL con los parámetros
     let url = `https://resultados.mininterior.gob.ar/api/resultados/getResultados?anioEleccion=${anioEleccion}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccionGlobal}&categoriaId=${categoriaId}&distritoId=${idDistrito}&seccionId=${seccionId}&circuitoId=${circuitoIdGlobal}&mesaId=${mesaIdGlobal}`;
@@ -166,11 +170,60 @@ function filtrarInformacion() {
             })
         })
         .catch(error => {
-            mostrarMensaje("rojo");
+            mostrarMensaje("rojo-error");
         });
 }
 
 async function mostrarMensaje(color) {
+
+    const colorMensaje = document.getElementById('color-mensaje');
+    const textoMensaje = document.getElementById('texto-mensaje');
+
+    if(color == 'amarillo-filtrar'){
+        colorMensaje.setAttribute('class', 'exito');
+        textoMensaje.setAttribute('class', 'fas fa-thumbs-up');
+        textoMensaje.innerText = 'Debe seleccionar los valores a filtrar y hacer clic en el botón FILTRAR';
+        setTimeout(function () {
+            colorMensaje.setAttribute('class', 'hidden');
+        }, 4000)
+    }else if( color == 'amarillo-sin-datos'){
+        colorMensaje.setAttribute('class', 'exito');
+        textoMensaje.setAttribute('class', 'fas fa-thumbs-up');
+        textoMensaje.innerText = 'No se encontró información para la consulta realizada.';
+        setTimeout(function () {
+            colorMensaje.setAttribute('class', 'hidden');
+        }, 4000)
+    }else if( color == 'rojo-error'){
+        colorMensaje.setAttribute('class', 'exito');
+        textoMensaje.setAttribute('class', 'fas fa-thumbs-up');
+        textoMensaje.innerText = 'Error';
+        setTimeout(function () {
+            colorMensaje.setAttribute('class', 'hidden');
+        }, 4000)
+    }else{
+
+    }
+
+    
+    document.getElementById(mensajeClass).style.display = "block";
+    setTimeout(() => {
+        document.getElementById(mensajeClass).style.display = "none"
+    }, "3000");
+}
+
+function crearTitulo() {
+
+    const titulo = document.getElementById('sec-titulo');
+
+    titulo.innerHTML = `
+    <div class="" id="sec-titulo">
+        <h2>Elecciones ${datos.anioEleccion} | Generales</h2>
+        <p class="texto-path">${datos.anioEleccion} > Generales > Provisorio > ${datos.cargoTexto} > ${datos.distritoTexto} > ${datos.seccionTexto}</p>
+    </div>`
+
+}
+
+async function mostrarCuadros(color) {
     let mensajeClass
     switch(color){
         case "rojo":
@@ -187,5 +240,3 @@ async function mostrarMensaje(color) {
     setTimeout(() => {
         document.getElementById(mensajeClass).style.display = "none"}, "3000");
 }
-
-

@@ -273,6 +273,24 @@ select{
   border-radius: 10px;
 }
 
+.correcto {
+  background-color: var(--mensaje-usuario-verde);
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.error {
+  background-color: var(--mensaje-usuario-rojo);
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.cuidado {
+  background-color: var(--mensaje-usuario-amarillo);
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
 .texto-mensaje{
   font-weight: 200px;
   color: #FFffFF;
@@ -288,6 +306,9 @@ select{
   display: none;
 }
 
+.correcto, .cuidado, .error {
+  display: none;
+}
 .partido {
   text-align: left;
   font-weight: 100;
