@@ -205,9 +205,9 @@ async function mostrarMensaje(color) {
     }
 
     
-    document.getElementById(mensajeClass).style.display = "block";
+    document.getElementById(sec-messages).style.display = "block";
     setTimeout(() => {
-        document.getElementById(mensajeClass).style.display = "none"
+        document.getElementById(sec-messages).style.display = "none"
     }, "3000");
 }
 
@@ -223,20 +223,20 @@ function crearTitulo(seccionTexto) {
 
 }
 
-async function mostrarCuadros(color) {
-    let mensajeClass
-    switch(color){
-        case "rojo":
-            mensajeClass = "error";
-        case "verde":
-            mensajeClass = "correcto";
+// async function mostrarCuadros(color) {
+//     let mensajeClass
+//     switch(color){
+//         case "rojo":
+//             mensajeClass = "error";
+//         case "verde":
+//             mensajeClass = "correcto";
 
-        default:
-            mensajeClass = "cuidado";
+//         default:
+//             mensajeClass = "cuidado";
 
-    }
-    document.getElementById(mensajeClass).style.display = "block";
-    //setTimeout(document.getElementById(mensajeClass).style.display = "none", 5000);
-    setTimeout(() => {
-        document.getElementById(mensajeClass).style.display = "none"}, "3000");
-}
+//     }
+//     document.getElementById(mensajeClass).style.display = "block";
+//     //setTimeout(document.getElementById(mensajeClass).style.display = "none", 5000);
+//     setTimeout(() => {
+//         document.getElementById(mensajeClass).style.display = "none"}, "3000");
+// }
