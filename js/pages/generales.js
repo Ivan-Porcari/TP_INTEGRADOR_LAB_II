@@ -127,6 +127,11 @@ function seleccionarSeccion() {
 }
 
 function filtrarInformacion() {
+    const partidos = document.querySelectorAll('.partido');
+
+    partidos.forEach(box => {
+        box.remove();
+});
     // Validar que los campos no estén vacíos
     let selectedDistrito = document.getElementById("select-distrito")
     if (periodosSelect.value === "" || idCargo.value === "" || idDistritoOption.value === "" || selectSeccion.value === "" && selectedDistrito.options[selectedDistrito.selectedIndex].text != "ARGENTINA") {
@@ -169,6 +174,7 @@ function filtrarInformacion() {
             console.log(datosJSON2);
             cargarDatos();
             
+            //agregamos al dom los nombres de los partidos politicos
             const divAgrupaciones = document.createElement("div")
             document.getElementById("estadisticas_partidos").appendChild(divAgrupaciones)
             data.valoresTotalizadosPositivos.forEach(partido => {
