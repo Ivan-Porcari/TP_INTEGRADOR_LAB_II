@@ -152,6 +152,7 @@ function filtrarInformacion() {
     let mesaIdGlobal = mesaId;
 
     crearTitulo(seccionTexto);
+    
 
     // Construir la URL con los parámetros
     let url = `https://resultados.mininterior.gob.ar/api/resultados/getResultados?anioEleccion=${anioEleccion}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccionGlobal}&categoriaId=${categoriaId}&distritoId=${idDistrito}&seccionId=${seccionId}&circuitoId=${circuitoIdGlobal}&mesaId=${mesaIdGlobal}`;
@@ -167,6 +168,16 @@ function filtrarInformacion() {
             datosJSON2 = data;
             console.log(datosJSON2);
             cargarDatos();
+            
+            const divAgrupaciones = document.createElement("div")
+            document.getElementById("estadisticas_partidos").appendChild(divAgrupaciones)
+            data.valoresTotalizadosPositivos.forEach(partido => {
+                console.log(partido.nombreAgrupacion)
+                let divPartido = document.createElement("div")
+                divPartido.classList.add("partido")
+                divPartido.innerHTML = `<h3>${partido.nombreAgrupacion}</h3>`
+                divAgrupaciones.appendChild(divPartido)
+            })
         })
         .catch(error => {
             mostrarMensaje("rojo-error");
@@ -237,6 +248,7 @@ function cargarDatos() {
     mesasEscrutadas.textContent = `Mesas Escrutadas ${contentMesa}`;
     electores.textContent = `Electores ${contentElectores}`;
     participacionEscrutado.textContent = `Participacion sobre escrutado ${contentParticipacion}%`;
+    
 
 }
 
