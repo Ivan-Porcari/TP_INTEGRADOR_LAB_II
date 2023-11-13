@@ -47,11 +47,6 @@ body{
     margin-left: 20px;
 }
 
-/* #sec-contenido {
-    display: flex;
-    justify-content: center;
-} */
-
 #sec-titulo h2 {
     font-size: 30px;
 
@@ -62,7 +57,12 @@ body{
     color: lightblue;
 }
 
-.clear {
+.botones_superior{
+    display: flex;
+    align-items: center;
+}
+
+.clearfix {
     clear: both;
 }
 
@@ -72,6 +72,7 @@ body{
     display: flex;
     margin-left: 200px;
 }
+
 
 
 .button-sumarInforme {
@@ -86,7 +87,7 @@ body{
     
 }
 
-/* ARREGLAR CON FLEX EL CENTRADO A LA DERECHA*/
+
 .button-electores {
 
     background-color: var(--magenta);
@@ -130,137 +131,48 @@ body{
     
 }
 
-.button-mesas p,
-.button-electores p,
-.button-escrutado p {
-    color: white;
-}
-
-.sec-cuadros {
-    display: grid;
-    grid-template-columns: 300px 300px 300px;
-    justify-content: space-around;
-    margin: 30px;
-    height: 400px;
-}
-
-.agrupacion-politica,
-.mapas,
-.res-votos {
-    width: 300px;
-    border: 1px var(--borde-Grilla) solid;
-    border-radius: 25px;
-    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
-    padding: 15px;
-}
-
-.agrupacion-politica h2,
-.mapas h2,
-.res-votos h2 {
-    text-align: center;
-    margin-bottom: 5px;
-}
-
-.progress {
-    margin-top: 5px;
-    height: 23px;
-    width: 100%;
-    border-radius: 5px;
-    margin-bottom: 15px;
-}
-
-.progress-bar {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    transition: width 0.25s;
-    border-radius: 5px;
-}
-
-.progress-bar-text {
-    margin-left: 10px;
-    font-weight: bold;
-    color: var(--textos);
-    font-size: 9px;
-}
-
-.chart-wrap {
-    --chart-width: 260px;
-    --grid-color: #aaa;
-    --bar-thickness: 25px;
-    --bar-rounded: 3px;
-    --bar-spacing: 10px;
-    font-family: sans-serif;
-    width: var(--chart-width);
-}
-
-.chart-wrap.horizontal .grid {
-    transform: rotate(-90deg);
-}
-
-.chart-wrap.horizontal .bar::after {
-    transform: rotate(45deg);
-    padding-top: 0px;
-    display: block;
-}
-
-.chart-wrap .grid {
-    margin-top: 60px;
-    margin-left: 20px;
-    position: relative;
-    padding: 5px 0 5px 0;
-    height: 100%;
-    width: 100%;
-    border-left: 2px solid var(--grid-color);
-    font-size: 10px;
-}
-
-.chart-wrap .grid::before {
-    font-size: 0.8em;
-    font-weight: bold;
-    content: '0%';
-    position: absolute;
-    left: -0.5em;
-    top: -1.5em;
-}
-
-.chart-wrap .grid::after {
-    font-size: 0.8em;
-    font-weight: bold;
-    content: '100%';
-    position: absolute;
-    right: -1.5em;
-    top: -1.5em;
-}
-
-.chart-wrap.horizontal .grid::before,
-.chart-wrap.horizontal .grid::after {
-    transform: rotate(90deg);
-}
-
-.chart-wrap .bar {
-    width: var(--bar-value);
-    height: var(--bar-thickness);
-    margin: var(--bar-spacing) 0;
-    background-color: var(--bar-color);
-    border-radius: 0 var(--bar-rounded) var(--bar-rounded) 0;
-}
-
-.chart-wrap .bar:hover {
-    opacity: 0.7;
-}
-
-.chart-wrap .bar::after {
-    content: attr(data-name);
-    margin-left: 100%;
-    padding: 10px;
-    display: inline-block;
-    white-space: nowrap;
-}
-
 .individual{
     float: left;
 }
+
+
+.cantidades h3 {
+    color: white;    
+}
+
+.cuadros{
+    margin: 35px;
+    display: flex;
+    justify-content: space-around;
+    height: 600px;
+}
+
+.cuadros > *{
+    display: block;
+    border: 1px var(--borde-Grilla) solid;
+    border-radius: 25px;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 33vw;
+    margin: 10px;
+}
+
+.cuadros > h3{
+    margin: auto;
+}
+.cuadros-texto{
+    font-weight: bold;
+    padding: 1.8em 0 0 0;
+    white-space: nowrap;
+    justify-self: center;
+}
+#cuadros_mapas > svg{
+    padding-top: 100px;
+}
+.placeholder_estadisticaHor{
+    overflow: hidden scroll;
+}
+
 
 .select-general {
     color: var(--celeste);

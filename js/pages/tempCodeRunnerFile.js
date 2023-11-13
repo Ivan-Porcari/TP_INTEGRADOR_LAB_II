@@ -1,4 +1,4 @@
-async function mostrarCuadros(color) {
+async function mostrarCuadros(color = "") {
     let mensajeClass
     switch(color){
         case "rojo":

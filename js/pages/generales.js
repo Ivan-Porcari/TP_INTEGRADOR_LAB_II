@@ -140,7 +140,13 @@ function filtrarInformacion() {
     let seccionProvincialId = selectSeccion.value;
     let seccionId = selectSeccion.value;
     let selectedSeccion = selectSeccion.options[selectSeccion.selectedIndex];
-    let seccionTexto = selectedSeccion.textContent;
+    let seccionTexto
+    if (selectedDistrito.options[selectedDistrito.selectedIndex].text == "ARGENTINA"){
+        seccionTexto = "";
+    }
+    else{
+        seccionTexto = selectedSeccion.textContent
+    }
     let tipoEleccionGlobal = tipoEleccion; // Asegúrate de que esta variable está definida correctamente en tu script
     let circuitoIdGlobal = circuitoId; // Asegúrate de que esta variable está definida correctamente en tu script
     let mesaIdGlobal = mesaId;
@@ -198,37 +204,25 @@ async function mostrarMensaje(color) {
     }
 }
 
-function crearTitulo(seccionTexto) {
+function crearTitulo(seccionTexto = "") {
 
     const titulo = document.getElementById('sec-titulo');
-
-    titulo.innerHTML = `
-    <div class="" id="sec-titulo">
-        <h2>Elecciones ${anioEleccion} | Generales</h2>
-        <p class="texto-path">${anioEleccion} > Generales > Provisorio > ${cargoTexto} > ${distritoTexto} > ${seccionTexto}</p>
-    </div>`
-
+    let selectedDistrito = document.getElementById("select-distrito")
+    if(selectedDistrito.options[selectedDistrito.selectedIndex].text  != "ARGENTINA"){
+        titulo.innerHTML = `
+        <div class="" id="sec-titulo">-
+            <h2>Elecciones ${periodosSelect.value} | Generales</h2>
+            <p class="texto-path">${periodosSelect.value} > Generales > Provisorio > ${cargoTexto} > ${distritoTexto} > ${seccionTexto}</p>
+        </div>`
+    }
+    else{
+        titulo.innerHTML = `
+        <div class="" id="sec-titulo">-
+            <h2>Elecciones ${periodosSelect.value} | Generales</h2>
+            <p class="texto-path">${periodosSelect.value} > Generales > Provisorio > ${cargoTexto}</p>
+        </div>`
+    }
 }
-
-
-
-// async function mostrarCuadros(color) {
-//     let mensajeClass
-//     switch(color){
-//         case "rojo":
-//             mensajeClass = "error";
-//         case "verde":
-//             mensajeClass = "correcto";
-
-//         default:
-//             mensajeClass = "cuidado";
-
-//     }
-//     document.getElementById(mensajeClass).style.display = "block";
-//     //setTimeout(document.getElementById(mensajeClass).style.display = "none", 5000);
-//     setTimeout(() => {
-//         document.getElementById(mensajeClass).style.display = "none"}, "3000");
-// }
 
 
 function cargarDatos() {
@@ -243,6 +237,7 @@ function cargarDatos() {
     mesasEscrutadas.textContent = `Mesas Escrutadas ${contentMesa}`;
     electores.textContent = `Electores ${contentElectores}`;
     participacionEscrutado.textContent = `Participacion sobre escrutado ${contentParticipacion}%`;
+
 }
 
 function agregarInforme() {
@@ -268,14 +263,31 @@ function validarYGuardarInforme(informeCadena) {
 
     // Verificar si el informe ya existe
     if (informes.includes(informeCadena)) {
-        // Mostrar mensaje amarillo
+        mostrarCuadros()
         //mostrarMensaje("amarillo-sin-datos");
     } else {
         // Agregar el nuevo informe y guardar en localStorage
         informes.push(informeCadena);
         localStorage.setItem('INFORMES', JSON.stringify(informes));
-
+        mostrarCuadros("verde")
         // Mostrar mensaje verde
         //mostrarMensaje("verde-exito");
     }
+}
+
+async function mostrarCuadros(color = "") {
+    let mensajeClass
+    switch(color){
+        case "rojo":
+            mensajeClass = "error";
+        case "verde":
+            mensajeClass = "correcto";
+
+        default:
+            mensajeClass = "cuidado";
+
+    }
+    document.getElementById(mensajeClass).style.display = "block";
+    setTimeout(() => {
+        document.getElementById(mensajeClass).style.display = "none"}, "3000");
 }
