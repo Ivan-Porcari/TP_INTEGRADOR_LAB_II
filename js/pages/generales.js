@@ -158,16 +158,9 @@ function filtrarInformacion() {
             return response.json();
         })
         .then(data => {
-            console.log(data);
-            const divAgrupaciones = document.createElement("div")
-            document.getElementById("estadisticas_partidos").appendChild(divAgrupaciones)
-            data.valoresTotalizadosPositivos.forEach(partido => {
-                console.log(partido.nombreAgrupacion)
-                let divPartido = document.createElement("div")
-                divPartido.classList.add("partido")
-                divPartido.innerHTML = `<h3>${partido.nombreAgrupacion}</h3>`
-                divAgrupaciones.appendChild(divPartido)
-            })
+            datosJSON2 = data;
+            console.log(datosJSON2);
+            cargarDatos();
         })
         .catch(error => {
             mostrarMensaje("rojo-error");
@@ -203,12 +196,6 @@ async function mostrarMensaje(color) {
     }else{
 
     }
-
-    
-    document.getElementById(sec-messages).style.display = "block";
-    setTimeout(() => {
-        document.getElementById(sec-messages).style.display = "none"
-    }, "3000");
 }
 
 function crearTitulo(seccionTexto) {
@@ -222,6 +209,8 @@ function crearTitulo(seccionTexto) {
     </div>`
 
 }
+
+
 
 // async function mostrarCuadros(color) {
 //     let mensajeClass
@@ -240,3 +229,53 @@ function crearTitulo(seccionTexto) {
 //     setTimeout(() => {
 //         document.getElementById(mensajeClass).style.display = "none"}, "3000");
 // }
+
+
+function cargarDatos() {
+    const mesasEscrutadas = document.getElementById("mesas");
+    const electores = document.getElementById("electores");
+    const participacionEscrutado = document.getElementById("participacion");
+
+    let contentMesa = datosJSON2.estadoRecuento.mesasTotalizadas;
+    let contentElectores = datosJSON2.estadoRecuento.cantidadElectores;
+    let contentParticipacion = datosJSON2.estadoRecuento.participacionPorcentaje;
+
+    mesasEscrutadas.textContent = `Mesas Escrutadas ${contentMesa}`;
+    electores.textContent = `Electores ${contentElectores}`;
+    participacionEscrutado.textContent = `Participacion sobre escrutado ${contentParticipacion}%`;
+}
+
+function agregarInforme() {
+    // Recuperar valores
+    let vAnio = periodosSelect.value;
+    let vTipoRecuento = tipoRecuento; // Asegúrate de que esta variable esté definida
+    let vTipoEleccion = tipoEleccion; // Asegúrate de que esta variable esté definida
+    let vCategoriaId = idCargo.value;
+    let vDistrito = idDistritoOption.value;
+    let vSeccionProvincial = selectSeccion.value;
+    let vSeccionId = selectSeccion.value; // Asumiendo que esto es correcto
+
+    // Construir cadena
+    let informeCadena = `${vAnio}|${vTipoRecuento}|${vTipoEleccion}|${vCategoriaId}|${vDistrito}|${vSeccionProvincial}|${vSeccionId}`;
+
+    // Continuar con los pasos 4 y 5
+    validarYGuardarInforme(informeCadena);
+}
+
+function validarYGuardarInforme(informeCadena) {
+    // Obtener informes existentes o inicializar un array vacío
+    let informes = JSON.parse(localStorage.getItem('INFORMES')) || [];
+
+    // Verificar si el informe ya existe
+    if (informes.includes(informeCadena)) {
+        // Mostrar mensaje amarillo
+        //mostrarMensaje("amarillo-sin-datos");
+    } else {
+        // Agregar el nuevo informe y guardar en localStorage
+        informes.push(informeCadena);
+        localStorage.setItem('INFORMES', JSON.stringify(informes));
+
+        // Mostrar mensaje verde
+        //mostrarMensaje("verde-exito");
+    }
+}
