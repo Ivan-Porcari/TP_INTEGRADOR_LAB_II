@@ -316,5 +316,44 @@ select{
 }
 
 #cuadros_estadisticas{
-  overflow-x: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+
+.partido{
+  font-size: small;
+  display: grid;
+  grid-template-columns: 25% 25% 20% 30%;
+  grid-template-rows: 35% 35% 30%;
+  padding: 2px;
+}
+.partido_nombre{
+  grid-column: 1/4;
+  grid-row: 1/2;
+}
+
+.partido_porcentaje{
+  grid-column: 4/5;
+  grid-row: 1/2;
+}
+
+.partido_votos{
+  grid-column: 4/5;
+  grid-row: 2/3;
+}
+
+.barras{
+  grid-column: 1/5;
+  grid-row: 3/4;
+  margin: 5px;
+  border-radius: 8px;
+}
+
+.barra_porcentaje{
+  background-color: rgb(24, 255, 78);
+}
+
+.barra_fondo{
+  background-color: #9f9f9f9a;
 }

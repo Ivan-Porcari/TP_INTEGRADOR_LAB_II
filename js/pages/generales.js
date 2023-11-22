@@ -178,10 +178,16 @@ function filtrarInformacion() {
             const divAgrupaciones = document.createElement("div")
             document.getElementById("estadisticas_partidos").appendChild(divAgrupaciones)
             data.valoresTotalizadosPositivos.forEach(partido => {
+                console.log(partido)
                 console.log(partido.nombreAgrupacion)
                 let divPartido = document.createElement("div")
                 divPartido.classList.add("partido")
-                divPartido.innerHTML = `<h3>${partido.nombreAgrupacion}</h3>`
+                divPartido.innerHTML = `<h4 class="partido_nombre">${partido.nombreAgrupacion}</h4>
+                                        <h4 class="partido_porcentaje">${partido.votosPorcentaje}%</h4>
+                                        <h4 class="partido_votos">${partido.votos}  VOTOS</h4>
+                                        <label class="barra_porcentaje barras style="width:20%;"></label>
+                                        <label class="barra_fondo barras"></label>`
+                                        
                 divAgrupaciones.appendChild(divPartido)
             })
         })
