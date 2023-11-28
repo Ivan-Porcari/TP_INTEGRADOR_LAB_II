@@ -195,7 +195,7 @@ function filtrarInformacion() {
             const barras = document.getElementById("grid");
             const divAgrupaciones = document.createElement("div")
             document.getElementById("estadisticas_partidos").appendChild(divAgrupaciones)
-            
+
             data.valoresTotalizadosPositivos.forEach(partido => {
                 console.log(partido)
                 console.log(partido.nombreAgrupacion)
@@ -225,18 +225,28 @@ async function mostrarMensaje(color) {
     const mensajes = {
         'amarillo-no-cargado': {
             clase: 'amarillo',
-            texto: 'No se logro completar lo solicitado',
+            texto: ' No se logro completar lo solicitado',
             icono: 'fas fa-exclamation'
         },
         'rojo-vacio': {
             clase: 'rojo',
-            texto: 'Seleccione todos los datos antes de filtrar.',
+            texto: ' Seleccione todos los datos antes de filtrar.',
             icono: 'fas fa-exclamation-triangle'
         },
         'verde-cargado': {
             clase: 'verde',
-            texto: 'Los datos se cargaron de forma correcta.',
+            texto: ' Los datos se cargaron de forma correcta.',
             icono: 'fas fa-thumbs-up'
+        },
+        'verde-informe': {
+            clase: 'verde',
+            texto: ' Los datos del informe se agregaron correctamente.',
+            icono: 'fas fa-thumbs-up'
+        },
+        'rojo-informe': {
+            clase: 'rojo',
+            texto: ' Los datos se encuentran vacios, No se guardaron en local Storage.',
+            icono: 'fas fa-exclamation-triangle'
         }
     };
 
@@ -294,19 +304,6 @@ function cargarDatos() {
 
 }
 
-// function agregarInforme() {
-//     let vAnio = periodosSelect.value;
-//     let vTipoRecuento = tipoRecuento; 
-//     let vTipoEleccion = tipoEleccion; 
-//     let vCategoriaId = idCargo.value;
-//     let vDistrito = idDistritoOption.value;
-//     let vSeccionProvincial = selectSeccion.value;
-//     let vSeccionId = selectSeccion.value; 
-
-//     let informeCadena = `${vAnio}|${vTipoRecuento}|${vTipoEleccion}|${vCategoriaId}|${vDistrito}|${vSeccionProvincial}|${vSeccionId}`;
-
-// }
-
 function agregarInforme() {
     try {
         if (Object.keys(datosJSON2).length !== 0) {
@@ -324,7 +321,7 @@ function agregarInforme() {
         } else {
             console.error('infoJSON está vacío. No se guardará en localStorage.');
 
-            mensajito = 'rojo';
+            mostrarMensaje("rojo-informe");
         }
 
         var storageActual = localStorage.getItem('dataInforme');
@@ -347,7 +344,7 @@ function agregarInforme() {
                 // Guardar el objeto actualizado en el localStorage
                 localStorage.setItem('dataInforme', JSON.stringify(existente));
                 console.log('JSON agregado correctamente.');
-                mensajito = 'verde-informe';
+                mostrarMensaje("verde-informe");
             } else {
 
                 mensajito = 'amarillo';
@@ -356,7 +353,7 @@ function agregarInforme() {
         } else {
             localStorage.setItem('dataInforme', JSON.stringify([dataInforme]));
             console.log('Primer JSON guardado correctamente.');
-            mensajito = 'verde-informe';
+            mostrarMensaje("verde-informe");
         }
     } catch (error) {
         console.error('Se produjo un error:', error);

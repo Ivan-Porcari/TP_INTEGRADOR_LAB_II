@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
         jsonStorage = JSON.parse(actualStorage);
         console.log(jsonStorage);
         cargarDatosInformes();
+        mostrarMensaje("verde-cargado");
+        
 
     }
 });
@@ -91,7 +93,7 @@ async function mostrarMensaje(color) {
         },
         'verde-cargado': {
             clase: 'verde',
-            texto: ' Los datos se cargaron de forma correcta.',
+            texto: ' Los datos de informe se cargaron de forma correcta.',
             icono: 'fas fa-thumbs-up'
         }
     };
