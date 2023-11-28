@@ -1,4 +1,4 @@
-const tipoEleccion = 2;
+const tipoEleccion = 1;
 const anioEleccion = 0;
 const tipoRecuento = 1;
 const categoriaId = 2;
@@ -13,6 +13,7 @@ let idCargos = '';
 let datosJSON = '';
 let datosJSON2 = '';
 let seccionProvincialId = '';
+let seccionTexto = '';
 
 
 const url = "https://resultados.mininterior.gob.ar/api/menu";
@@ -34,7 +35,7 @@ fetch(urlPeriodos)
         });
         console.log(data)
     })
-    .catch(error => consolog.log(error))
+    .catch(error => console.log(error))
 
 //llamar a una función para toma rel valor del select-aa
 function seleccionarAnio() {
@@ -126,12 +127,26 @@ function seleccionarSeccion() {
 }
 
 function filtrarInformacion() {
+    const partidos = document.querySelectorAll('.partido');
+
+    partidos.forEach(box => {
+        box.remove();
+    });
     // Validar que los campos no estén vacíos
     let selectedDistrito = document.getElementById("select-distrito")
-    if (periodosSelect.value === "" || idCargo.value === "" || idDistritoOption.value === "" || selectSeccion.value === "" && selectedDistrito.options[selectedDistrito.selectedIndex].text != "ARGENTINA") {
-        mostrarMensaje("amarillo-filtrar");
+    if (periodosSelect.value === "Año" ||
+        idCargo.value === "Cargo" ||
+        idDistritoOption.value === "Distrito" ||
+        selectSeccion.value === "Seccion" &&
+        selectedDistrito.options[selectedDistrito.selectedIndex].text != "ARGENTINA") {
+        mostrarMensaje("rojo-vacio");
+        return;
     }
 
+    let main = document.getElementById('sec-inicio');
+    main.style.display = "block";
+    let sin_datos = document.getElementById('sin_datos');
+    sin_datos.style.display = "none";
     // Recuperar valores de los filtros
     let anioEleccion = periodosSelect.value;
     let categoriaId = idCargo.value;
@@ -139,11 +154,10 @@ function filtrarInformacion() {
     let seccionProvincialId = selectSeccion.value;
     let seccionId = selectSeccion.value;
     let selectedSeccion = selectSeccion.options[selectSeccion.selectedIndex];
-    let seccionTexto
-    if (selectedDistrito.options[selectedDistrito.selectedIndex].text == "ARGENTINA"){
+    if (selectedDistrito.options[selectedDistrito.selectedIndex].text == "ARGENTINA") {
         seccionTexto = "";
     }
-    else{
+    else {
         seccionTexto = selectedSeccion.textContent
     }
     let tipoEleccionGlobal = tipoEleccion; // Asegúrate de que esta variable está definida correctamente en tu script
@@ -151,6 +165,7 @@ function filtrarInformacion() {
     let mesaIdGlobal = mesaId;
 
     crearTitulo(seccionTexto);
+
 
     // Construir la URL con los parámetros
     let url = `https://resultados.mininterior.gob.ar/api/resultados/getResultados?anioEleccion=${anioEleccion}&tipoRecuento=${tipoRecuento}&tipoEleccion=${tipoEleccionGlobal}&categoriaId=${categoriaId}&distritoId=${idDistrito}&seccionId=${seccionId}&circuitoId=${circuitoIdGlobal}&mesaId=${mesaIdGlobal}`;
@@ -166,40 +181,65 @@ function filtrarInformacion() {
             datosJSON2 = data;
             console.log(datosJSON2);
             cargarDatos();
+            mostrarMensaje("verde-cargado");
+            //agregamos al dom los nombres de los partidos politicos
+            const barras = document.getElementById("grid");
+            const divAgrupaciones = document.createElement("div")
+            document.getElementById("estadisticas_partidos").appendChild(divAgrupaciones)
+            data.valoresTotalizadosPositivos.forEach(partido => {
+                console.log(partido)
+                console.log(partido.nombreAgrupacion)
+                let divPartido = document.createElement("div")
+                divPartido.classList.add("partido")
+                divPartido.innerHTML = `<h4 class="partido_nombre">${partido.nombreAgrupacion}</h4>
+                                        <h4 class="partido_porcentaje">${partido.votosPorcentaje}%</h4>
+                                        <h4 class="partido_votos">${partido.votos}  VOTOS</h4>
+                                        <label class="barra_porcentaje barras style="width:20%;"></label>
+                                        <label class="barra_fondo barras"></label>`
+
+                divAgrupaciones.appendChild(divPartido)
+                const bar = `<div class="bar" style="--bar-value:${partido.votosPorcentaje}%;" data-name="${partido.nombreAgrupacion}" title="${partido.nombreAgrupacion} ${partido.votosPorcentaje}%"></div>`;
+                barras.innerHTML += bar;
+            })
         })
         .catch(error => {
-            mostrarMensaje("rojo-error");
+            mostrarMensaje("amarillo-no-cargado");
         });
 }
 
 async function mostrarMensaje(color) {
-
     const colorMensaje = document.getElementById('color-mensaje');
     const textoMensaje = document.getElementById('texto-mensaje');
 
-    if(color == 'amarillo-filtrar'){
-        colorMensaje.setAttribute('class', 'exito');
-        textoMensaje.setAttribute('class', 'fas fa-thumbs-up');
-        textoMensaje.innerText = 'Debe seleccionar los valores a filtrar y hacer clic en el botón FILTRAR';
-        setTimeout(function () {
-            colorMensaje.setAttribute('class', 'hidden');
-        }, 4000)
-    }else if( color == 'amarillo-sin-datos'){
-        colorMensaje.setAttribute('class', 'exito');
-        textoMensaje.setAttribute('class', 'fas fa-thumbs-up');
-        textoMensaje.innerText = 'No se encontró información para la consulta realizada.';
-        setTimeout(function () {
-            colorMensaje.setAttribute('class', 'hidden');
-        }, 4000)
-    }else if( color == 'rojo-error'){
-        colorMensaje.setAttribute('class', 'exito');
-        textoMensaje.setAttribute('class', 'fas fa-thumbs-up');
-        textoMensaje.innerText = 'Error';
-        setTimeout(function () {
-            colorMensaje.setAttribute('class', 'hidden');
-        }, 4000)
-    }else{
+    // Define los mensajes y clases de estilo para cada color
+    const mensajes = {
+        'amarillo-no-cargado': {
+            clase: 'amarillo',
+            texto: 'No se logro completar lo solicitado',
+            icono: 'fas fa-exclamation'
+        },
+        'rojo-vacio': {
+            clase: 'rojo',
+            texto: 'Seleccione todos los datos antes de filtrar.',
+            icono: 'fas fa-exclamation-triangle'
+        },
+        'verde-cargado': {
+            clase: 'verde',
+            texto: 'Los datos se cargaron de forma correcta.',
+            icono: 'fas fa-thumbs-up'
+        }
+    };
 
+    // Verifica si el color proporcionado tiene un mensaje y una clase asociados
+    if (mensajes[color]) {
+        colorMensaje.className = mensajes[color].clase; // Asigna la clase de estilo
+        textoMensaje.innerText = mensajes[color].texto; // Asigna el texto del mensaje
+        textoMensaje.className = mensajes[color].icono; // Asigna la clase del icono
+        // Oculta el mensaje después de un tiempo
+        setTimeout(function () {
+            colorMensaje.className = 'hidden';
+            textoMensaje.className = ''; // Remueve la clase del icono
+        }, 4000);
     }
 }
 
@@ -207,18 +247,18 @@ function crearTitulo(seccionTexto = "") {
 
     const titulo = document.getElementById('sec-titulo');
     let selectedDistrito = document.getElementById("select-distrito")
-    if(selectedDistrito.options[selectedDistrito.selectedIndex].text  != "ARGENTINA"){
+    if (selectedDistrito.options[selectedDistrito.selectedIndex].text != "ARGENTINA") {
         titulo.innerHTML = `
         <div class="" id="sec-titulo">-
-            <h2>Elecciones ${periodosSelect.value} | PASO</h2>
-            <p class="texto-path">${periodosSelect.value} > PASO > Provisorio > ${cargoTexto} > ${distritoTexto} > ${seccionTexto}</p>
+            <h2>Elecciones ${periodosSelect.value} | Generales</h2>
+            <p class="texto-path">${periodosSelect.value} > Generales > Provisorio > ${cargoTexto} > ${distritoTexto} > ${seccionTexto}</p>
         </div>`
     }
-    else{
+    else {
         titulo.innerHTML = `
         <div class="" id="sec-titulo">-
-            <h2>Elecciones ${periodosSelect.value} | PASO</h2>
-            <p class="texto-path">${periodosSelect.value} > PASO > Provisorio > ${cargoTexto}</p>
+            <h2>Elecciones ${periodosSelect.value} | Generales</h2>
+            <p class="texto-path">${periodosSelect.value} > Generales > Provisorio > ${cargoTexto}</p>
         </div>`
     }
 }
@@ -228,6 +268,8 @@ function cargarDatos() {
     const mesasEscrutadas = document.getElementById("mesas");
     const electores = document.getElementById("electores");
     const participacionEscrutado = document.getElementById("participacion");
+    const mapa = document.getElementById("mapa");
+    const nombreMapa = document.getElementById("nombreMapa");
 
     let contentMesa = datosJSON2.estadoRecuento.mesasTotalizadas;
     let contentElectores = datosJSON2.estadoRecuento.cantidadElectores;
@@ -236,56 +278,78 @@ function cargarDatos() {
     mesasEscrutadas.textContent = `Mesas Escrutadas ${contentMesa}`;
     electores.textContent = `Electores ${contentElectores}`;
     participacionEscrutado.textContent = `Participacion sobre escrutado ${contentParticipacion}%`;
+
+    nombreMapa.textContent = `${distritoTexto}`;
+    mapa.innerHTML = provincias[idDistrito];
+
 }
+
+// function agregarInforme() {
+//     let vAnio = periodosSelect.value;
+//     let vTipoRecuento = tipoRecuento; 
+//     let vTipoEleccion = tipoEleccion; 
+//     let vCategoriaId = idCargo.value;
+//     let vDistrito = idDistritoOption.value;
+//     let vSeccionProvincial = selectSeccion.value;
+//     let vSeccionId = selectSeccion.value; 
+
+//     let informeCadena = `${vAnio}|${vTipoRecuento}|${vTipoEleccion}|${vCategoriaId}|${vDistrito}|${vSeccionProvincial}|${vSeccionId}`;
+
+// }
 
 function agregarInforme() {
-    // Recuperar valores
-    let vAnio = periodosSelect.value;
-    let vTipoRecuento = tipoRecuento; // Asegúrate de que esta variable esté definida
-    let vTipoEleccion = tipoEleccion; // Asegúrate de que esta variable esté definida
-    let vCategoriaId = idCargo.value;
-    let vDistrito = idDistritoOption.value;
-    let vSeccionProvincial = selectSeccion.value;
-    let vSeccionId = selectSeccion.value; // Asumiendo que esto es correcto
+    try {
+        if (Object.keys(datosJSON2).length !== 0) {
 
-    // Construir cadena
-    let informeCadena = `${vAnio}|${vTipoRecuento}|${vTipoEleccion}|${vCategoriaId}|${vDistrito}|${vSeccionProvincial}|${vSeccionId}`;
+            var dataInforme = {
+                año: periodosSelect.value,
+                tipo: 'Generales',
+                recuento: 'Provisorio',
+                cargo: cargoTexto,
+                distrito: distritoTexto,
+                seccion: seccionTexto,
+                distritoId: parseInt(idDistritoOption.value),
+                informe: datosJSON2
+            };
+        } else {
+            console.error('infoJSON está vacío. No se guardará en localStorage.');
 
-    // Continuar con los pasos 4 y 5
-    validarYGuardarInforme(informeCadena);
-}
+            mensajito = 'rojo';
+        }
 
-function validarYGuardarInforme(informeCadena) {
-    // Obtener informes existentes o inicializar un array vacío
-    let informes = JSON.parse(localStorage.getItem('INFORMES')) || [];
+        var storageActual = localStorage.getItem('dataInforme');
 
-    // Verificar si el informe ya existe
-    if (informes.includes(informeCadena)) {
-        mostrarCuadros()
-        //mostrarMensaje("amarillo-sin-datos");
-    } else {
-        // Agregar el nuevo informe y guardar en localStorage
-        informes.push(informeCadena);
-        localStorage.setItem('INFORMES', JSON.stringify(informes));
-        mostrarCuadros("verde")
-        // Mostrar mensaje verde
-        //mostrarMensaje("verde-exito");
+        if (storageActual) {
+
+            var existente = JSON.parse(storageActual);
+            var existe = false;
+
+            for (var i = 0; i < existente.length; i++) {
+                if (JSON.stringify(existente[i]) === JSON.stringify(dataInforme)) {
+                    existe = true;
+                    break;
+                }
+            }
+
+            if (!existe) {
+                existente.push(dataInforme);
+
+                // Guardar el objeto actualizado en el localStorage
+                localStorage.setItem('dataInforme', JSON.stringify(existente));
+                console.log('JSON agregado correctamente.');
+                mensajito = 'verde-informe';
+            } else {
+
+                mensajito = 'amarillo';
+                console.log('El JSON ya existe, no se puede agregar.');
+            }
+        } else {
+            localStorage.setItem('dataInforme', JSON.stringify([dataInforme]));
+            console.log('Primer JSON guardado correctamente.');
+            mensajito = 'verde-informe';
+        }
+    } catch (error) {
+        console.error('Se produjo un error:', error);
+        mensajito = 'rojo';
     }
-}
-
-async function mostrarCuadros(color = "") {
-    let mensajeClass
-    switch(color){
-        case "rojo":
-            mensajeClass = "error";
-        case "verde":
-            mensajeClass = "correcto";
-
-        default:
-            mensajeClass = "cuidado";
-
-    }
-    document.getElementById(mensajeClass).style.display = "block";
-    setTimeout(() => {
-        document.getElementById(mensajeClass).style.display = "none"}, "3000");
 }
