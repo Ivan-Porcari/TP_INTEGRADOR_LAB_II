@@ -357,3 +357,260 @@ select{
 .barra_fondo{
   background-color: #9f9f9f9a;
 }
+
+#messages {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  background: transparent;
+  text-align: center;
+  font-size: 12px;
+}
+
+.mensajes {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  list-style-type: none;
+  width: 400px;
+  border-radius: 20px;
+}
+
+.amarillo {
+  background-color: var(--mensaje-usuario-amarillo);
+  margin-bottom: 10px;
+  border-radius: 10px;
+  display: flex;
+}
+
+.verde {
+  background-color: var(--mensaje-usuario-verde);
+  margin-bottom: 10px;
+  border-radius: 10px;
+  display: flex;
+}
+
+.rojo {
+  background-color: var(--mensaje-usuario-rojo);
+  margin-bottom: 10px;
+  border-radius: 10px;
+  display: flex;
+}
+
+.verde p,
+.rojo p,
+.amarillo p {
+  font-size: 15px;
+  padding: 10px;
+  color: #FFffFF;
+  font-weight: 200;
+}
+.hidden {
+  display: none;
+}
+
+#sin_datos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+#sin_datos img {
+  width: 60%;
+  height: 60%;
+}
+
+#sin_datos h1 {
+  background-color: rgb(252, 210, 0);
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+
+/*barra de progreso*/
+.progress {
+  height: 35px;
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.progress-bar {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  transition: width 0.25s;
+  border-radius: 5px;
+}
+
+.progress-bar-text {
+  margin-left: 10px;
+  font-weight: bold;
+  color: var(--textos);
+}
+
+.chart-wrap {
+  --grid-color: #aaa;
+  --bar-thickness: 25px;
+  --bar-rounded: 3px;
+  --bar-spacing: 10px;
+  font-family: sans-serif;
+  width: var(--chart-width);
+}
+
+.chart-wrap .title {
+  font-weight: bold;
+  padding: 1.8em 0 2.8em;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* cuando definimos el gráfico en horizontal, lo giramos 90 grados */
+.chart-wrap.horizontal .grid {
+  transform: rotate(-90deg);
+}
+
+.chart-wrap.horizontal .bar::after {
+  /* giramos las letras para horizontal*/
+  transform: rotate(45deg);
+  padding-top: 0px;
+  display: block;
+}
+
+.chart-wrap .grid {
+  margin-left: 50px;
+  position: relative;
+  padding: 5px 0 5px 0;
+  height: 60%;
+  width: 60%;
+  border-left: 2px solid var(--grid-color);
+  font-size: 10px;
+}
+
+/* posicionamos el % del gráfico*/
+.chart-wrap .grid::before {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: '0%';
+  position: absolute;
+  left: -0.5em;
+  top: -1.5em;
+}
+
+.chart-wrap .grid::after {
+  font-size: 0.8em;
+  font-weight: bold;
+  content: '100%';
+  position: absolute;
+  right: -1.5em;
+  top: -1.5em;
+}
+
+/* giramos las valores de 0% y 100% para horizontal */
+.chart-wrap.horizontal .grid::before,
+.chart-wrap.horizontal .grid::after {
+  transform: rotate(90deg);
+}
+
+.chart-wrap .bar {
+  width: var(--bar-value);
+  height: var(--bar-thickness);
+  margin: var(--bar-spacing) 0;
+  background-color: var(--bar-color);
+  border-radius: 0 var(--bar-rounded) var(--bar-rounded) 0;
+}
+
+.bar:nth-child(1) {
+  --bar-color: rgb(0, 169, 232);
+}
+
+.bar:nth-child(2) {
+  --bar-color: rgb(52, 194, 82);
+}
+
+.bar:nth-child(3) {
+  --bar-color: rgb(255, 207, 51);
+}
+
+.bar:nth-child(4) {
+  --bar-color: rgb(255, 105, 180);
+}
+
+.bar:nth-child(5) {
+  --bar-color: rgb(148, 0, 211);
+}
+
+.bar:nth-child(6) {
+  --bar-color: rgb(255, 165, 0);
+}
+
+.bar:nth-child(7) {
+  --bar-color: rgb(171, 40, 40);
+}
+
+.bar:nth-child(8) {
+  --bar-color: rgb(0, 0, 255);
+}
+
+.bar:nth-child(9) {
+  --bar-color: rgb(128, 128, 128);
+}
+
+.bar:nth-child(10) {
+  --bar-color: rgb(255, 255, 102);
+}
+
+.bar:nth-child(11) {
+  --bar-color: rgb(0, 128, 128);
+}
+
+.bar:nth-child(12) {
+  --bar-color: rgb(128, 0, 128);
+}
+
+.bar:nth-child(13) {
+  --bar-color: rgb(139, 0, 0);
+}
+
+.bar:nth-child(14) {
+  --bar-color: rgb(255, 182, 193);
+}
+
+.bar:nth-child(15) {
+  --bar-color: rgb(0, 0, 139);
+}
+
+.bar:nth-child(16) {
+  --bar-color: rgb(184, 134, 11);
+}
+
+.bar:nth-child(17) {
+  --bar-color: rgb(0, 100, 0);
+}
+
+.bar:nth-child(18) {
+  --bar-color: rgb(255, 69, 0);
+}
+
+.bar:nth-child(19) {
+  --bar-color: rgb(139, 69, 19);
+}
+
+.bar:nth-child(20) {
+  --bar-color: rgb(64, 64, 64);
+}
+
+.chart-wrap .bar:hover {
+  opacity: 0.7;
+}
+
+.chart-wrap .bar::after {
+  content: attr(data-name);
+  margin-left: 100%;
+  padding: 10px;
+  display: inline-block;
+  white-space: nowrap;
+}
