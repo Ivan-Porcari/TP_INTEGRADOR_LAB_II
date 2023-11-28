@@ -143,8 +143,16 @@ function filtrarInformacion() {
         return;
     }
 
-    let main = document.getElementById('sec-inicio');
+    let main = document.getElementById('sec-contenido');
     main.style.display = "block";
+    let main2 = document.getElementById('blank');
+    main2.style.display = "block";
+    let main3 = document.getElementById('subtitulo');
+    if (main3) {
+        main3.style.display = "block";
+    } else {
+        console.error("El elemento 'subtitulo' no se encontró en el DOM.");
+    }
     let sin_datos = document.getElementById('sin_datos');
     sin_datos.style.display = "none";
     // Recuperar valores de los filtros
@@ -186,20 +194,24 @@ function filtrarInformacion() {
             const barras = document.getElementById("grid");
             const divAgrupaciones = document.createElement("div")
             document.getElementById("estadisticas_partidos").appendChild(divAgrupaciones)
+            let indice = 0;
+            
             data.valoresTotalizadosPositivos.forEach(partido => {
                 console.log(partido)
                 console.log(partido.nombreAgrupacion)
                 let divPartido = document.createElement("div")
                 divPartido.classList.add("partido")
-                divPartido.innerHTML = `<h4 class="partido_nombre">${partido.nombreAgrupacion}</h4>
+                divPartido.innerHTML = 
+                                       `<h4 class="partido_nombre">${partido.nombreAgrupacion}</h4>
                                         <h4 class="partido_porcentaje">${partido.votosPorcentaje}%</h4>
                                         <h4 class="partido_votos">${partido.votos}  VOTOS</h4>
-                                        <label class="barra_porcentaje barras style="width:20%;"></label>
-                                        <label class="barra_fondo barras"></label>`
+                                        <label class="barra_porcentaje barras" style="width:20%;background: ${colores[indice % colores.length].color};"></label>
+                                        <label class="barra_fondo barras" style="background: ${colores[indice % colores.length].colorClaro}"></label>`
 
                 divAgrupaciones.appendChild(divPartido)
                 const bar = `<div class="bar" style="--bar-value:${partido.votosPorcentaje}%;" data-name="${partido.nombreAgrupacion}" title="${partido.nombreAgrupacion} ${partido.votosPorcentaje}%"></div>`;
                 barras.innerHTML += bar;
+                indice++;
             })
         })
         .catch(error => {
@@ -215,18 +227,38 @@ async function mostrarMensaje(color) {
     const mensajes = {
         'amarillo-no-cargado': {
             clase: 'amarillo',
-            texto: 'No se logro completar lo solicitado',
+            texto: ' No se logro completar lo solicitado',
+            icono: 'fas fa-exclamation'
+        },
+        'amarillo-informe': {
+            clase: 'amarillo',
+            texto: ' El informe ya existe',
             icono: 'fas fa-exclamation'
         },
         'rojo-vacio': {
             clase: 'rojo',
-            texto: 'Seleccione todos los datos antes de filtrar.',
+            texto: ' Seleccione todos los datos antes de filtrar.',
             icono: 'fas fa-exclamation-triangle'
         },
         'verde-cargado': {
             clase: 'verde',
-            texto: 'Los datos se cargaron de forma correcta.',
+            texto: ' Los datos se cargaron de forma correcta.',
             icono: 'fas fa-thumbs-up'
+        },
+        'verde-informe': {
+            clase: 'verde',
+            texto: ' Los datos del informe se agregaron correctamente.',
+            icono: 'fas fa-thumbs-up'
+        },
+        'rojo-informe': {
+            clase: 'rojo',
+            texto: ' No se guardará el informe vacío.',
+            icono: 'fas fa-exclamation-triangle'
+        },
+        'rojo-error': {
+            clase: 'rojo',
+            texto: ' Los datos se encuentran vacios, No se guardaron en local Storage.',
+            icono: 'fas fa-exclamation-triangle'
         }
     };
 
@@ -250,15 +282,15 @@ function crearTitulo(seccionTexto = "") {
     if (selectedDistrito.options[selectedDistrito.selectedIndex].text != "ARGENTINA") {
         titulo.innerHTML = `
         <div class="" id="sec-titulo">-
-            <h2>Elecciones ${periodosSelect.value} | Generales</h2>
-            <p class="texto-path">${periodosSelect.value} > Generales > Provisorio > ${cargoTexto} > ${distritoTexto} > ${seccionTexto}</p>
+            <h2>Elecciones ${periodosSelect.value} | PASO</h2>
+            <p class="texto-path">${periodosSelect.value} > PASO > Provisorio > ${cargoTexto} > ${distritoTexto} > ${seccionTexto}</p>
         </div>`
     }
     else {
         titulo.innerHTML = `
         <div class="" id="sec-titulo">-
-            <h2>Elecciones ${periodosSelect.value} | Generales</h2>
-            <p class="texto-path">${periodosSelect.value} > Generales > Provisorio > ${cargoTexto}</p>
+            <h2>Elecciones ${periodosSelect.value} | PASO</h2>
+            <p class="texto-path">${periodosSelect.value} > PASO > Provisorio > ${cargoTexto}</p>
         </div>`
     }
 }
@@ -284,26 +316,13 @@ function cargarDatos() {
 
 }
 
-// function agregarInforme() {
-//     let vAnio = periodosSelect.value;
-//     let vTipoRecuento = tipoRecuento; 
-//     let vTipoEleccion = tipoEleccion; 
-//     let vCategoriaId = idCargo.value;
-//     let vDistrito = idDistritoOption.value;
-//     let vSeccionProvincial = selectSeccion.value;
-//     let vSeccionId = selectSeccion.value; 
-
-//     let informeCadena = `${vAnio}|${vTipoRecuento}|${vTipoEleccion}|${vCategoriaId}|${vDistrito}|${vSeccionProvincial}|${vSeccionId}`;
-
-// }
-
 function agregarInforme() {
     try {
         if (Object.keys(datosJSON2).length !== 0) {
 
             var dataInforme = {
                 año: periodosSelect.value,
-                tipo: 'Generales',
+                tipo: 'Paso',
                 recuento: 'Provisorio',
                 cargo: cargoTexto,
                 distrito: distritoTexto,
@@ -314,7 +333,7 @@ function agregarInforme() {
         } else {
             console.error('infoJSON está vacío. No se guardará en localStorage.');
 
-            mensajito = 'rojo';
+            mostrarMensaje("rojo-informe");
         }
 
         var storageActual = localStorage.getItem('dataInforme');
@@ -337,16 +356,16 @@ function agregarInforme() {
                 // Guardar el objeto actualizado en el localStorage
                 localStorage.setItem('dataInforme', JSON.stringify(existente));
                 console.log('JSON agregado correctamente.');
-                mensajito = 'verde-informe';
+                mostrarMensaje("verde-informe");
             } else {
 
-                mensajito = 'amarillo';
+                mostrarMensaje("amarillo-informe");
                 console.log('El JSON ya existe, no se puede agregar.');
             }
         } else {
             localStorage.setItem('dataInforme', JSON.stringify([dataInforme]));
             console.log('Primer JSON guardado correctamente.');
-            mensajito = 'verde-informe';
+            mostrarMensaje("verde-informe");
         }
     } catch (error) {
         console.error('Se produjo un error:', error);
