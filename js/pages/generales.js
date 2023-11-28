@@ -144,8 +144,10 @@ function filtrarInformacion() {
         return;
     }
 
-    let main = document.getElementById('sec-inicio');
+    let main = document.getElementById('sec-contenido');
     main.style.display = "block";
+    let main2 = document.getElementById('blank');
+    main2.style.display = "block";
     let sin_datos = document.getElementById('sin_datos');
     sin_datos.style.display = "none";
     // Recuperar valores de los filtros
