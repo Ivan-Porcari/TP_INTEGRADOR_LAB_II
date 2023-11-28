@@ -228,6 +228,11 @@ async function mostrarMensaje(color) {
             texto: ' No se logro completar lo solicitado',
             icono: 'fas fa-exclamation'
         },
+        'amarillo-informe': {
+            clase: 'amarillo',
+            texto: ' El informe ya existe',
+            icono: 'fas fa-exclamation'
+        },
         'rojo-vacio': {
             clase: 'rojo',
             texto: ' Seleccione todos los datos antes de filtrar.',
@@ -244,6 +249,11 @@ async function mostrarMensaje(color) {
             icono: 'fas fa-thumbs-up'
         },
         'rojo-informe': {
+            clase: 'rojo',
+            texto: ' No se guardará el informe vacío.',
+            icono: 'fas fa-exclamation-triangle'
+        },
+        'rojo-error': {
             clase: 'rojo',
             texto: ' Los datos se encuentran vacios, No se guardaron en local Storage.',
             icono: 'fas fa-exclamation-triangle'
@@ -347,7 +357,7 @@ function agregarInforme() {
                 mostrarMensaje("verde-informe");
             } else {
 
-                mensajito = 'amarillo';
+                mostrarMensaje("amarillo-informe");
                 console.log('El JSON ya existe, no se puede agregar.');
             }
         } else {
