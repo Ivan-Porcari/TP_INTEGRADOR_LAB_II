@@ -79,19 +79,19 @@ async function mostrarMensaje(color) {
 
     // Define los mensajes y clases de estilo para cada color
     const mensajes = {
-        'amarillo-no-informe': {
+        'amarillo-no-informes': {
             clase: 'amarillo',
-            texto: 'No existen informes guardados para visualizar',
+            texto: ' No existen informes guardados para visualizar',
             icono: 'fas fa-exclamation'
         },
         'rojo-vacio': {
             clase: 'rojo',
-            texto: 'Seleccione todos los datos antes de filtrar.',
+            texto: ' Seleccione todos los datos antes de filtrar.',
             icono: 'fas fa-exclamation-triangle'
         },
         'verde-cargado': {
             clase: 'verde',
-            texto: 'Los datos se cargaron de forma correcta.',
+            texto: ' Los datos se cargaron de forma correcta.',
             icono: 'fas fa-thumbs-up'
         }
     };

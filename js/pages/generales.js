@@ -148,6 +148,12 @@ function filtrarInformacion() {
     main.style.display = "block";
     let main2 = document.getElementById('blank');
     main2.style.display = "block";
+    let main3 = document.getElementById('subtitulo');
+    if (main3) {
+        main3.style.display = "block";
+    } else {
+        console.error("El elemento 'subtitulo' no se encontró en el DOM.");
+    }
     let sin_datos = document.getElementById('sin_datos');
     sin_datos.style.display = "none";
     // Recuperar valores de los filtros
@@ -189,6 +195,7 @@ function filtrarInformacion() {
             const barras = document.getElementById("grid");
             const divAgrupaciones = document.createElement("div")
             document.getElementById("estadisticas_partidos").appendChild(divAgrupaciones)
+            
             data.valoresTotalizadosPositivos.forEach(partido => {
                 console.log(partido)
                 console.log(partido.nombreAgrupacion)
